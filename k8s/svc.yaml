@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-webapp-service
+spec:
+  selector:
+    app: gowebapp
+  ports:
+  - port: 8080
+    targetPort: 8080
+  type: LoadBalancer

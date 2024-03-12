@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-webapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: gowebapp
+  template:
+    metadata:
+      labels:
+        app: gowebapp
+    spec:
+      containers:
+        - image: ariqmbrilian/public-image:c9ac1a3-dirty@sha256:f832f66d03bbba89eb84607845beb5640499123ec4eaf530485fdb4bd4fc6939
+          name: gowebapp
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-webapp-service
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: gowebapp
+  type: LoadBalancer
